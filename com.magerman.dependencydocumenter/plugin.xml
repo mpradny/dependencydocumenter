@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+ <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+         <command
+               commandId="com.magerman.dependencydocumenter.GenerateDocumentation"
+               style="push">
+         </command>
+      </menuContribution>
+   </extension>
+
+<extension
+      point="org.eclipse.ui.commands">
+
+   <command id="com.magerman.dependencydocumenter.GenerateDocumentation" name="Generate Dependency Documentation"></command>   
+</extension>
+
+
+<extension
+      point="org.eclipse.ui.handlers">
+   <handler
+         class="com.magerman.dependencydocumenter.GenerateDocumentationHandler"
+         commandId="com.magerman.dependencydocumenter.GenerateDocumentation">
+         <enabledWhen>
+         <with variable="selection">
+         <test property="com.ibm.deisgner.domino.ui.commons.extensions.category" value="scriptlibraries" forcePluginActivation="true" />
+         </with>
+         </enabledWhen>
+         
+         
+   </handler>   
+</extension>
+</plugin>

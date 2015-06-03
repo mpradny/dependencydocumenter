@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="com.magerman.dependencydocumenter.feature"
+      label="Dependencydocumenter"
+      version="0.9.1"
+      provider-name="MAGERMAN"
+      os="win32"
+      ws="win32">
+
+   <description url="http://www.example.com/description">
+      Allows for graphical representation of  design elements within an IBM Notes Database.
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      Copyright Andrew Magerman
+   </copyright>
+
+   <license url="http://www.example.com/license">
+      Apache License
+   </license>
+
+   <plugin
+         id="com.magerman.dependencydocumenter"
+         download-size="0"
+         install-size="0"
+         version="0.9.1"
+         unpack="false"/>
+
+</feature>

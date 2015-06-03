@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Bundle-Vendor: MAGERMAN
+Bundle-ActivationPolicy: lazy
+Bundle-Version: 0.9.1
+Bundle-Name: Dependencydocumenter Plug-in
+Bundle-Activator: com.magerman.dependencydocumenter.Activator
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: com.magerman.dependencydocumenter;singleton:=true
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ com.ibm.notes.java.ui,
+ com.ibm.designer.domino.ui.commons,
+ com.ibm.designer.domino.ide.resources,
+ org.junit
+Bundle-ClassPath: lib/commons-codec-1.5.jar,
+ lib/commons-io-2.2.jar,
+ .
+

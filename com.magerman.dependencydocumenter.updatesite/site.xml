@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/com.magerman.dependencydocumenter.feature_0.9.1.jar" id="com.magerman.dependencydocumenter.feature" version="0.9.1" os="win32" ws="win32">
+      <category name="DDE Plugin Dependency Documenter"/>
+   </feature>
+   <category-def name="DDE Plugin Dependency Documenter" label="DDE Plugin Dependency Documenter"/>
+</site>
