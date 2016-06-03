@@ -25,13 +25,6 @@
    <handler
          class="com.magerman.dependencydocumenter.GenerateDocumentationHandler"
          commandId="com.magerman.dependencydocumenter.GenerateDocumentation">
-         <enabledWhen>
-         <with variable="selection">
-         <test property="com.ibm.deisgner.domino.ui.commons.extensions.category" value="scriptlibraries" forcePluginActivation="true" />
-         </with>
-         </enabledWhen>
-         
-         
    </handler>   
 </extension>
 </plugin>
