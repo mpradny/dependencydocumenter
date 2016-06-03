@@ -20,6 +20,14 @@ import org.w3c.dom.NodeList;
  * 
  */
 public class DesignElement {
+	
+	/**
+	 * Matching patterns - comments
+	 */
+	private static Pattern patt_comment_single=Pattern.compile("'.*");
+	private static Pattern patt_comment_multi=Pattern.compile("(%REM.*?%END REM",Pattern.DOTALL+Pattern.CASE_INSENSITIVE);
+	private static Pattern patt_use = Pattern.compile("Use \"(.*?)\"",Pattern.CASE_INSENSITIVE);
+	
     /**
      * The name of the node, e.g. something like 'scriptlibrary'
      */
@@ -137,8 +145,11 @@ public class DesignElement {
      * Using cunning regexes, finds out the name of the parent references.
      */
     public final void parsedeclarations() {
-	Pattern patt = Pattern.compile("Use \"(.*?)\"");
-	Matcher m = patt.matcher(declarations);
+    //remove comments
+    declarations=patt_comment_single.matcher(declarations).replaceAll("");
+    declarations=patt_comment_multi.matcher(declarations).replaceAll("");
+    
+	Matcher m = patt_use.matcher(declarations);
 	StringBuffer sb = new StringBuffer(declarations.length());
 	while (m.find()) {
 	    String foundtext = m.group(1);
