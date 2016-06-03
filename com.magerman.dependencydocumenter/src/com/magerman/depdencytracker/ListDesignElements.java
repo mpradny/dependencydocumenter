@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map.Entry;
+import java.util.TreeMap;
 
 /**
  * The Class ListDesignElements.
@@ -41,20 +42,35 @@ public class ListDesignElements {
      * Creates the tree.
      */
     public final void createTree() {
-	for (DesignElement d : allDesignElements.values()) {
-	    if (!d.getParentReferences().isEmpty()) {
-		for (String parentReference : d.getParentReferences()) {
-		    DesignElement potentialParent;
-		    potentialParent = allDesignElements.get(parentReference);
-		    if (potentialParent != null) {
-			d.parents.add(potentialParent);
-			potentialParent.setLinkedToOthers(true);
-			d.setLinkedToOthers(true);
-			relationships.add(new Relationship(potentialParent, d));
+    	TreeMap<String,DesignElement> includes=new TreeMap<String, DesignElement>();
+		for (DesignElement d : allDesignElements.values()) {
+		    if (!d.getParentReferences().isEmpty()) {
+				for (String parentReference : d.getParentReferences()) {
+				    DesignElement potentialParent;
+				    potentialParent = allDesignElements.get(parentReference);
+				    if (potentialParent != null) {
+						d.parents.add(potentialParent);
+						potentialParent.setLinkedToOthers(true);
+						d.setLinkedToOthers(true);
+						relationships.add(new Relationship(potentialParent, d));
+				    }else{
+				    	potentialParent = includes.get(parentReference);
+				    	if (potentialParent==null){
+					    	potentialParent=new DesignElement();
+					    	potentialParent.setName(parentReference);
+					    	potentialParent.setFromTemplate("");
+					    	includes.put(parentReference, potentialParent);
+				    	}
+				    	d.parents.add(potentialParent);
+						potentialParent.setLinkedToOthers(true);
+						d.setLinkedToOthers(true);
+						relationships.add(new Relationship(potentialParent,d));
+				    	
+				    }
+				}
 		    }
 		}
-	    }
-	}
+		allDesignElements.putAll(includes);
     }
 
     /**

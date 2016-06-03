@@ -27,6 +27,7 @@ public class DesignElement {
 	private static Pattern patt_comment_single=Pattern.compile("'.*");
 	private static Pattern patt_comment_multi=Pattern.compile("(%REM.*?%END REM",Pattern.DOTALL+Pattern.CASE_INSENSITIVE);
 	private static Pattern patt_use = Pattern.compile("Use \"(.*?)\"",Pattern.CASE_INSENSITIVE);
+	private static Pattern patt_include = Pattern.compile("%Include.*\"(.*?)\"",Pattern.CASE_INSENSITIVE);
 	
     /**
      * The name of the node, e.g. something like 'scriptlibrary'
@@ -116,6 +117,11 @@ public class DesignElement {
 		    Node lsnode = childnode.getFirstChild();
 		    declarations = lsnode.getTextContent();
 		}
+		if (childnode.getAttributes().getNamedItem("event")
+				.getTextContent().equalsIgnoreCase("declarations")) {
+			Node lsnode = childnode.getFirstChild();
+			declarations = declarations + lsnode.getTextContent();
+		}
 	    }
 	}
 
@@ -161,6 +167,16 @@ public class DesignElement {
 	    }
 	}
 	m.appendTail(sb);
+	
+	Matcher m2 = patt_include.matcher(declarations);
+	StringBuffer sb2 = new StringBuffer(declarations.length());
+	while (m2.find()) {
+	    String foundtext = "incl:" + m2.group(1).replace("\\", "\\\\");
+	    if (!foundtext.equalsIgnoreCase(getName())) {
+	    	getParentReferences().add(foundtext);
+	    }
+	}
+	m2.appendTail(sb2);
     }
 
     /**
@@ -168,6 +184,14 @@ public class DesignElement {
      */
     public final String getName() {
 	return name;
+    }
+    
+    /**
+     * Set name of design element
+     * @param name
+     */
+    public void setName(String name){
+    	this.name=name;
     }
 
     /**
